@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="spring_security_management:war exploded">
-    <output-path>$PROJECT_DIR$/spring_security_management/src/main/webapp</output-path>
+    <output-path>$PROJECT_DIR$/spring_security_management/target/spring_security_management-1.0-SNAPSHOT</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>

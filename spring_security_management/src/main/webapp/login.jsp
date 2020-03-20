@@ -32,7 +32,7 @@
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<p class="login-box-msg">登录系统</p>
-			<form action="${pageContext.request.contextPath}/mylogin" method="post">
+			<form action="${pageContext.request.contextPath}/login" method="post">
 				<security:csrfInput/>
 				<div class="form-group has-feedback">
 					<input type="text" name="username" class="form-control"

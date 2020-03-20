@@ -22,6 +22,8 @@
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
+    <security:http pattern="/login.jsp" security="none"/>
+    <security:http pattern="/failer.jsp" security="none"/>
 
     <!-- 配置 spring security -->
     <!--
@@ -30,7 +32,7 @@
     -->
     <security:http auto-config="true" use-expressions="true">
         <!--登录页面是不需要被拦截，这里最好不要写物理地址 jsp ，会容易被下面的url pattern="/**"过滤-->
-        <security:intercept-url pattern="/mylogin" access="permitAll()" />
+        <security:intercept-url pattern="/login" access="permitAll()" />
 
         <!--拦截资源
         ?	匹配任何单字符
@@ -42,9 +44,9 @@
 
 
 
-        <!--指定自己的 login 页面，建议 login.jsp的url 取名为 login, 因为过滤器过滤的时候不会考虑后缀，这里是为了举例说明 -->
+        <!--指定自己的 login 页面，建议 login.jsp的url 取名为 login, 因为过滤器过滤的时候不会考虑后缀 -->
         <security:form-login login-page="/login.jsp"
-                             login-processing-url="/mylogin"
+                             login-processing-url="/login"
                              default-target-url="/index.jsp"
                              authentication-failure-url="/failer.jsp" />
 
@@ -54,7 +56,7 @@
         将会是一个 404页面
         -->
         <security:logout logout-url="/logout"
-                         logout-success-url="/mylogin"/>
+                         logout-success-url="/login"/>
 
         <!-- 去掉csrf拦截的过滤器，否则主页没有csrf的信息下就访问不了,
         如果想 csrf拦截，那么注释掉后，在login.jsp 中加入
