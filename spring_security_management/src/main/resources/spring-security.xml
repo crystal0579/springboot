@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd"
+>
+    <!--静态资源的文件也是不能被拦截的
+    security="none" 表示你和security没有关系，不需要经过拦截器
+    所以它和  <security:intercept-url *** access="permitAll()" /> 不一样，后者是经过拦截器，只是被放行了
+    并且它必须是放在 security:intercept-url pattern="/**" 这样的 security 总配置之前，表示不被aop到
+    -->
+    <security:http pattern="/css/**" security="none"/>
+    <security:http pattern="/img/**" security="none"/>
+    <security:http pattern="/plugins/**" security="none"/>
+
+    <!-- 配置 spring security -->
+    <!--
+        auto-config="true" 表示自动加载 spring security 的配置文件
+        use-expressions="true" 表示使用 spring 的 el 表达式来配置 spring security
+    -->
+    <security:http auto-config="true" use-expressions="true">
+        <!--登录页面是不需要被拦截，这里最好不要写物理地址 jsp ，会容易被下面的url pattern="/**"过滤-->
+        <security:intercept-url pattern="/mylogin" access="permitAll()" />
+
+        <!--拦截资源
+        ?	匹配任何单字符
+        *	匹配0或者任意数量的 字符
+        **	匹配0或者更多的 目录
+        hasAnyRole 是 el 表达式， 这里是只有 ROLE_USER 才有权限访问
+        -->
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')"/>
+
+
+
+        <!--指定自己的 login 页面，建议 login.jsp的url 取名为 login, 因为过滤器过滤的时候不会考虑后缀，这里是为了举例说明 -->
+        <security:form-login login-page="/login.jsp"
+                             login-processing-url="/mylogin"
+                             default-target-url="/index.jsp"
+                             authentication-failure-url="/failer.jsp" />
+
+        <!--配置推出登录信息
+        //退出登录的地址，使用了 security的默认注销地址
+        并且，默认的/logout 是一个 post 请求，所以如果你用get方式访问 /logout 的话，
+        将会是一个 404页面
+        -->
+        <security:logout logout-url="/logout"
+                         logout-success-url="/mylogin"/>
+
+        <!-- 去掉csrf拦截的过滤器，否则主页没有csrf的信息下就访问不了,
+        如果想 csrf拦截，那么注释掉后，在login.jsp 中加入
+        <security:csrfInput/>
+        保障csrf的安全机制是 spring security 里对于每次的 post put delete 请求都会进行 token的生成校验
+        那么当某个post请求访问某个页面时,post所在请求里请一定要带上 csrf 信息
+        -->
+       <!-- <security:csrf disabled="true" />-->
+    </security:http>
+
+
+    <!--
+    spring security 默认的认证必须是加密的，加上 {noop} 表示不加密认证
+    -->
+    <security:authentication-manager>
+        <!--设置Spring Security认证用户信息的来源 先使用内存机制读取
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="user" password="{noop}user"
+                               authorities="ROLE_USER" />
+                <security:user name="admin" password="{noop}admin"
+                               authorities="ROLE_ADMIN" />
+            </security:user-service>
+        </security:authentication-provider>
+        -->
+        <!--数据库的读取模式， UserServiceImpl是自己写的实现类，上面有 @Service，所以能按类名注入进来-->
+        <security:authentication-provider user-service-ref="userServiceImpl">
+        </security:authentication-provider>
+
+    </security:authentication-manager>
+
+</beans>

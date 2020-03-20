@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        * {font-family: Microsoft YaHei, Tahoma, Helvetica, Arial, sans-serif;}
+        .header {background-color: #f5f5f5;padding: 20px;}
+        .header a {padding: 0 20px;}
+        .container {padding: 20px;margin:20px auto;}
+        .footer {height: 40px;background-color: #f5f5f5;border-top: 1px solid #ddd;padding: 20px;}
+    </style>
+    <title>myself login</title>
+</head>
+<body>
+    <header class="header">
+        <div>
+            采用th方式进行布局login
+        </div>
+    </header>
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username</label>:
+        <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+        <label for="password">Password</label>:
+        <input type="password" id="password" name="password" /> <br />
+        <!--<input type="checkbox" id="rememberMe" name="rememberMe" > remember me-->
+        <input type="submit" value="Log in" />
+    </form>
+</body>
+</html>

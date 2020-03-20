@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/boot/boot.iml" filepath="$PROJECT_DIR$/boot/boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boot-mybatisp/boot-mybatisp.iml" filepath="$PROJECT_DIR$/boot-mybatisp/boot-mybatisp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mq-consumer/mq-consumer.iml" filepath="$PROJECT_DIR$/mq-consumer/mq-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mq-producer/mq-producer.iml" filepath="$PROJECT_DIR$/mq-producer/mq-producer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_security_management/spring_security_management.iml" filepath="$PROJECT_DIR$/spring_security_management/spring_security_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sprisecutiydb/sprisecuritydb.iml" filepath="$PROJECT_DIR$/sprisecutiydb/sprisecuritydb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sprisecutiy/sprisecutiy.iml" filepath="$PROJECT_DIR$/sprisecutiy/sprisecutiy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
+    </modules>
+  </component>
+</project>
