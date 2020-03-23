@@ -19,11 +19,11 @@
     所以它和  <security:intercept-url *** access="permitAll()" /> 不一样，后者是经过拦截器，只是被放行了
     并且它必须是放在 security:intercept-url pattern="/**" 这样的 security 总配置之前，表示不被aop到
     -->
+    <security:http pattern="/failer.jsp" security="none"/>
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
-    <security:http pattern="/login.jsp" security="none"/>
-    <security:http pattern="/failer.jsp" security="none"/>
+
 
     <!-- 配置 spring security -->
     <!--
@@ -31,8 +31,9 @@
         use-expressions="true" 表示使用 spring 的 el 表达式来配置 spring security
     -->
     <security:http auto-config="true" use-expressions="true">
-        <!--登录页面是不需要被拦截，这里最好不要写物理地址 jsp ，会容易被下面的url pattern="/**"过滤-->
+        <!--登录页面是不需要被拦截，要写再下面的url pattern="/**"过滤之前，permitAll只是表示不被登录页面所拦截，其他filter还是会过滤的-->
         <security:intercept-url pattern="/login" access="permitAll()" />
+        <security:intercept-url pattern="/login.jsp" access="permitAll()" />
 
         <!--拦截资源
         ?	匹配任何单字符
@@ -56,7 +57,7 @@
         将会是一个 404页面
         -->
         <security:logout logout-url="/logout"
-                         logout-success-url="/login"/>
+                         logout-success-url="/login.jsp"/>
 
         <!-- 去掉csrf拦截的过滤器，否则主页没有csrf的信息下就访问不了,
         如果想 csrf拦截，那么注释掉后，在login.jsp 中加入
@@ -70,6 +71,7 @@
 
     <!--
     spring security 默认的认证必须是加密的，加上 {noop} 表示不加密认证
+    <bean id="userServiceImpl" class="com.itheima.service.impl.UserServiceImpl"/>
     -->
     <security:authentication-manager>
         <!--设置Spring Security认证用户信息的来源 先使用内存机制读取
@@ -80,12 +82,14 @@
                 <security:user name="admin" password="{noop}admin"
                                authorities="ROLE_ADMIN" />
             </security:user-service>
-        </security:authentication-provider>
-        -->
-        <!--数据库的读取模式， UserServiceImpl是自己写的实现类，上面有 @Service，所以能按类名注入进来-->
-        <security:authentication-provider user-service-ref="userServiceImpl">
-        </security:authentication-provider>
+        </security:authentication-provider>-->
 
+        <!--数据库读取方式, 并且userServiceImpl 不需要额外注解，因为 该类上面已经有 @service了，忽略下面的红色报错 -->
+        <security:authentication-provider
+                user-service-ref="userServiceImpl">
+        </security:authentication-provider>
     </security:authentication-manager>
+
+
 
 </beans>

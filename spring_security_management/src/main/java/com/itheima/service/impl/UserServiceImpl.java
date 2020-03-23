@@ -66,10 +66,13 @@ public class UserServiceImpl implements UserService{
 
             List<SimpleGrantedAuthority> authorities = new ArrayList<>();
             //先hardcoding测试
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+//            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            List<SysRole> roles = sysUser.getRoles();
+            roles.forEach(r -> authorities.add(new SimpleGrantedAuthority(r.getRoleName())));
+
             //发现 UserDetails 是一个接口
             //密码先明文测试
-            UserDetails userDetails = new User(username,  "{noop}" + sysUser.getPassword(), authorities);
+            UserDetails userDetails = new User(sysUser.getUsername(),  "{noop}" + sysUser.getPassword(), authorities);
             return userDetails;
         }catch(Exception e){
             e.printStackTrace();
