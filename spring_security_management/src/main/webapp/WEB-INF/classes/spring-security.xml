@@ -66,6 +66,15 @@
         那么当某个post请求访问某个页面时,post所在请求里请一定要带上 csrf 信息
         -->
        <!-- <security:csrf disabled="true" />-->
+
+        <!-- 开启remember me 过滤器，设置token的存储时间为60s,当然不能点击注销（即/logout）功能，否则不起作用
+            data-source-ref="dataSource" 指定数据库连接池, 即spring ioc容器中的id 值
+            token-validity-seconds="60" 设置token存储时间为60秒 可省略
+            remember-me-parameter="remember-me" 指定记住的参数名 可省略
+        -->
+        <security:remember-me   token-validity-seconds="60"
+                                data-source-ref="dataSource"
+                                remember-me-parameter="remember-me"/>
     </security:http>
 
 
