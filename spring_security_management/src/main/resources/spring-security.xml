@@ -69,6 +69,8 @@
     </security:http>
 
 
+    <!-- 把用户密码登录时的加密对象放到 IOC容器中,其实当 id 命名成 passwordEncoder 时，这句话可以不写 -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
     <!--
     spring security 默认的认证必须是加密的，加上 {noop} 表示不加密认证
     <bean id="userServiceImpl" class="com.itheima.service.impl.UserServiceImpl"/>
@@ -87,6 +89,7 @@
         <!--数据库读取方式, 并且userServiceImpl 不需要额外注解，因为 该类上面已经有 @service了，忽略下面的红色报错 -->
         <security:authentication-provider
                 user-service-ref="userServiceImpl">
+                <security:password-encoder ref="passwordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
 

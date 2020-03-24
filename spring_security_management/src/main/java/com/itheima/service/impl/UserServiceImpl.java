@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +29,15 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 因为 spring-security.xml里有引入
+     */
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public void save(SysUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.save(user);
     }
 
@@ -56,6 +64,13 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    /**
+     * 这里是 spring UserDetailsService里的方法实现，
+     * 它只传入了 username
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try{
@@ -72,7 +87,20 @@ public class UserServiceImpl implements UserService{
 
             //发现 UserDetails 是一个接口
             //密码先明文测试
-            UserDetails userDetails = new User(sysUser.getUsername(),  "{noop}" + sysUser.getPassword(), authorities);
+            //UserDetails userDetails = new User(sysUser.getUsername(),  "{noop}" + sysUser.getPassword(), authorities);
+
+            //加密时，{noop}可删除
+            //简单user
+//            UserDetails userDetails = new User(sysUser.getUsername(),  sysUser.getPassword(), authorities);
+
+            //带上用户是否有效等信息
+            UserDetails userDetails = new User(sysUser.getUsername(), sysUser.getPassword(),
+                    sysUser.getStatus() == 1 ,
+                    true,
+                    true,
+                    true,
+                    authorities);
+
             return userDetails;
         }catch(Exception e){
             e.printStackTrace();
