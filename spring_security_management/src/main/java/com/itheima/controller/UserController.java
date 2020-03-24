@@ -21,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/findAll")
-    public String findAll(Model model){
+    public String findAll(Model model) {
         List<SysUser> list = userService.findAll();
         model.addAttribute("list", list);
         return "user-list";

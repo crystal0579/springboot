@@ -75,6 +75,9 @@
         <security:remember-me   token-validity-seconds="60"
                                 data-source-ref="dataSource"
                                 remember-me-parameter="remember-me"/>
+
+        <!-- 处理权限不够时的access denied异常, 但是太过简单粗暴，因为 csrf 的异常也会最终 access denied 的，就会分不清楚
+        <security:access-denied-handler error-page="/403.jsp" />-->
     </security:http>
 
 
@@ -102,6 +105,16 @@
         </security:authentication-provider>
     </security:authentication-manager>
 
-
+    <!--
+           开启权限控制的注解支持
+          secured-annotations="enabled"   spring security 内部的权限注解控制开关
+          pre-post-annotations="enabled"   spring 指定 的 权限控制开过
+          jsr250-annotations="enabled"     开启 java250注解开关
+       -->
+    <security:global-method-security
+            secured-annotations="enabled"
+            pre-post-annotations="enabled"
+            jsr250-annotations="enabled"
+    />
 
 </beans>

@@ -50,4 +50,15 @@
     </context-param>
     <absolute-ordering />
 
+    <!-- 异常处理 ,这样的方式也不是最佳方案，因为无法拦截处理
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+-->
 </web-app>
