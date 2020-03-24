@@ -102,6 +102,16 @@
         </security:authentication-provider>
     </security:authentication-manager>
 
-
+    <!--
+           开启权限控制的注解支持
+          secured-annotations="enabled"   spring security 内部的权限注解控制开关
+          pre-post-annotations="enabled"   spring 指定 的 权限控制开过
+          jsr250-annotations="enabled"     开启 java250注解开关
+       -->
+    <security:global-method-security
+            secured-annotations="enabled"
+            pre-post-annotations="enabled"
+            jsr250-annotations="enabled"
+    />
 
 </beans>

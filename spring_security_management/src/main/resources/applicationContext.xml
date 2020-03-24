@@ -37,6 +37,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!-- tx 表示对 @Transactional 注解的支持 -->
     <tx:annotation-driven/>
 
     <!-- 引入 spring security的配置文件

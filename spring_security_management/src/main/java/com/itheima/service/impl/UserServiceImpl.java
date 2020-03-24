@@ -6,6 +6,7 @@ import com.itheima.domain.SysUser;
 import com.itheima.service.RoleService;
 import com.itheima.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,6 +43,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Secured({"ROLE_ADMIN"})//有多个，请用逗号间隔 {"ROLE_ADMIN","ROLE_ORDER"}
+    // 也可以使用 jsr250注解 @RolesAllowed({"ROLE_ADMIN","ROLE_PRODUCT"})//JSR-250注解
+    //也可以使用spring注解 @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PRODUCT')")//spring表达式注解
     public List<SysUser> findAll() {
         return userDao.findAll();
     }
