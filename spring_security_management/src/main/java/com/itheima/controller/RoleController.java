@@ -20,9 +20,9 @@ public class RoleController {
     public String findAll(Model model) throws Exception{
         List<SysRole> list = roleService.findAll();
         model.addAttribute("list", list);
-        if (list != null){
-            throw new RuntimeException("测试异常");
-        }
+//        if (list != null){
+//            throw new RuntimeException("测试异常");
+//        }
         return "role-list";
     }
 
