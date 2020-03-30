@@ -53,6 +53,7 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>2.2.0</version>
         </dependency>
+        <!-- 其实这句话可以不用写，上面的依赖已经包含了 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>

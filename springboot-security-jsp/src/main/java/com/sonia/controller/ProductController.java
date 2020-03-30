@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/product")
 public class ProductController {
 
-    @RequestMapping  //那么这里就是直接访问 "/product" 母目录就行了
-    @ResponseBody
+//    @RequestMapping  //那么这里就是直接访问 "/product" 母目录就行了
+//    @ResponseBody
+//    public String findAll(){
+//        return "success";
+//    }
+
+    @RequestMapping("/findAll")
     public String findAll(){
-        return "success";
+        return "product-list";
     }
 }
