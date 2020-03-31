@@ -38,6 +38,7 @@
         </dependency>
         <!-- 它里面已经包含了 mybatis 的包，以及tk 相关的辅助包
               类似于 mybatis-spring-boot-starter
+              这个包，把 mapper的 xml 文件都省了，select语句直接以 annotation的方式写在了dao层的接口里
          -->
         <dependency>
             <groupId>tk.mybatis</groupId>
