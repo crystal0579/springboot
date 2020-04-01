@@ -30,10 +30,11 @@ public class JwtVerifyFilter extends BasicAuthenticationFilter {
         this.rsaKeyProperties = rsaKeyProperties;
     }
 
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         boolean debug = this.logger.isDebugEnabled();
         String header = request.getHeader("Authorization");
-        if (header == null || !header.toLowerCase().startsWith("bearer")) {
+        if (header == null || !header.toLowerCase().startsWith("bearer")) {//对标生成token的代码
             response.setContentType("application/json;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             PrintWriter out = response.getWriter();
@@ -47,7 +48,7 @@ public class JwtVerifyFilter extends BasicAuthenticationFilter {
             chain.doFilter(request, response);
         } else {
             String token = header.replace("Bearer", "");
-            Payload<SysUser> payload = JwtUtils.getInfoFromToken(token, rsaKeyProperties.getPublicKey(), SysUser.class);
+            Payload<SysUser> payload = JwtUtils.getInfoFromToken(token, rsaKeyProperties.getPublicKey(), SysUser.class);//解读token
             SysUser user = payload.getUserInfo();
             if (user != null){
                 UsernamePasswordAuthenticationToken authResult = new UsernamePasswordAuthenticationToken(user.getUsername(), null, user.getAuthorities());
