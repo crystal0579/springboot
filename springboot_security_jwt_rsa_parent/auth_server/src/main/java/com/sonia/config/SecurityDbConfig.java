@@ -27,10 +27,11 @@ public class SecurityDbConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-
+    //用户名密码认证
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    //单点登录 token 认证
     @Autowired
     private RsaKeyProperties rsaKeyProperties;
 
