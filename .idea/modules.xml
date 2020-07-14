@@ -4,10 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/boot/boot.iml" filepath="$PROJECT_DIR$/boot/boot.iml" />
       <module fileurl="file://$PROJECT_DIR$/boot-mybatisp/boot-mybatisp.iml" filepath="$PROJECT_DIR$/boot-mybatisp/boot-mybatisp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/mq-consumer/mq-consumer.iml" filepath="$PROJECT_DIR$/mq-consumer/mq-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/mq-producer/mq-producer.iml" filepath="$PROJECT_DIR$/mq-producer/mq-producer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spring_security_management/spring_security_management.iml" filepath="$PROJECT_DIR$/spring_security_management/spring_security_management.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sprisecutiydb/sprisecuritydb.iml" filepath="$PROJECT_DIR$/sprisecutiydb/sprisecuritydb.iml" />
       <module fileurl="file://$PROJECT_DIR$/sprisecutiy/sprisecutiy.iml" filepath="$PROJECT_DIR$/sprisecutiy/sprisecutiy.iml" />
       <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
     </modules>

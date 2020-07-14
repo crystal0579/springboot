@@ -1,6 +1,7 @@
 package cn.bysonia.bootmybatisp.controller;
 
 import cn.bysonia.bootmybatisp.bean.User;
+import cn.bysonia.bootmybatisp.common.annotation.SyslogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.logging.log4j.LogManager;
@@ -48,6 +49,7 @@ public class UserController {
     //swagger 只要我们的接口返回值中存在实体类，它就会被扫描到swagger中，即便 User 没有 @ApiModel
     @ApiOperation("用户控制类")
     @RequestMapping(value = "find/{id}/{name}")
+    @SyslogAnnotation(value="userGet",remark = "lkjljljlk")
     public User get(@PathVariable int id, @PathVariable String name){
         User user = new User();
         user.setId(id);

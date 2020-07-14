@@ -2,32 +2,44 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="auth_server" />
         <module name="boot" />
         <module name="boot-mybatisp" />
+        <module name="common" />
+        <module name="demo" />
         <module name="mq-consumer" />
-        <module name="spring_security_management" />
-        <module name="sprisecuritydb" />
         <module name="sprisecutiy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="auth_server" target="1.8" />
       <module name="boot" target="1.8" />
       <module name="boot-mybatisp" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="demo" target="1.8" />
       <module name="mq-consumer" target="1.8" />
       <module name="spring_security_management" target="1.8" />
+      <module name="springboot-security-jsp" target="1.8" />
+      <module name="springboot_security_jwt_rsa_parent" target="1.8" />
       <module name="sprisecuritydb" target="1.8" />
       <module name="sprisecutiy" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auth_server" options="-parameters" />
       <module name="boot" options="-parameters" />
       <module name="boot-mybatisp" options="-parameters" />
+      <module name="common" options="-parameters" />
+      <module name="demo" options="-parameters" />
       <module name="mq-consumer" options="-parameters" />
+      <module name="springboot-security-jsp" options="-parameters" />
+      <module name="springboot_security_jwt_rsa_parent" options="-parameters" />
       <module name="sprisecuritydb" options="-parameters" />
       <module name="sprisecutiy" options="-parameters" />
     </option>
