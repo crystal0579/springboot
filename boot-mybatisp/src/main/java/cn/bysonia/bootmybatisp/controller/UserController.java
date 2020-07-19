@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiParam;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -56,6 +53,24 @@ public class UserController {
         user.setAge(20);
         user.setDay(new Date());
         user.setName(name);
+//        throw new NumberFormatException();
+        return user;
+    }
+
+    @PostMapping(value = "add")
+    @SyslogAnnotation(value="userAdd",remark = "oiuouo")
+    public User add(@RequestBody User user){
+        return user;
+    }
+
+    @PostMapping(value = "test")
+    @SyslogAnnotation(value="userTest",remark = "jjjjj")
+    public User test(@RequestBody String username){
+        User user = new User();
+        user.setId(80);
+        user.setAge(20);
+        user.setDay(new Date());
+        user.setName(username);
         return user;
     }
 }

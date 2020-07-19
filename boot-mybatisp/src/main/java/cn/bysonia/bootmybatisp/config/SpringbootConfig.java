@@ -2,6 +2,7 @@ package cn.bysonia.bootmybatisp.config;
 
 import cn.bysonia.bootmybatisp.interceptor.HelloInterceptor;
 import cn.bysonia.bootmybatisp.interceptor.SyslogInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,17 +18,20 @@ public class SpringbootConfig implements WebMvcConfigurer {
         return new HelloInterceptor();
     }
 
-    @Bean
-    public SyslogInterceptor getSyslogInterceptor() {
-        return new SyslogInterceptor();
-    }
+//    @Bean
+//    public SyslogInterceptor getSyslogInterceptor() {
+//        return new SyslogInterceptor();
+//    }
 
+    @Autowired
+    private SyslogInterceptor syslogInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry){
         interceptorRegistry.addInterceptor(getHelloInterceptor())
                             .addPathPatterns("/test/pass")//拦截路径
                             .excludePathPatterns("/test/fail");//放行路径，其实这里没有什么太大意义
-        interceptorRegistry.addInterceptor(getSyslogInterceptor())
+//        interceptorRegistry.addInterceptor(getSyslogInterceptor())
+        interceptorRegistry.addInterceptor(syslogInterceptor)
                 .addPathPatterns("/**");
         /**
          * 这种情况用得会比较多

@@ -12,9 +12,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //首页是所有人都可以访问的，但是功能也只对应有权限的人才能访问
         http.authorizeRequests().antMatchers("/").permitAll()
+                                .antMatchers("/user/**").permitAll()
                                 .antMatchers("/level1/**").hasRole("vip1")
                                 .antMatchers("/level2/**").hasRole("vip2")
-                                .antMatchers("/level3/**").hasRole("vip3");
+                                .antMatchers("/level3/**").hasRole("vip3")
+                                .and()
+                                .csrf().disable();
 
         //没有权限会默认到登录页面
         //内置/login的页面
