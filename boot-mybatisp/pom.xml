@@ -132,14 +132,14 @@
 
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>main/resources</directory>
                 <filtering>true</filtering><!--默认情况下是false-->
                 <excludes>
                     <exclude>application-*.properties</exclude>
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>main/resources</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>application-${build.profile.id}.properties</include>
