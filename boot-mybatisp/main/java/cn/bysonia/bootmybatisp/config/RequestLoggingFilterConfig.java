@@ -20,7 +20,7 @@ public class RequestLoggingFilterConfig extends AbstractRequestLoggingFilter {
     @Override
     protected void initFilterBean() throws ServletException {
         super.initFilterBean();
-        setIncludePayload(true);
+        setIncludePayload(true);//request 的重置,里面实际上就是使用ContentCachingRequestWrapper
         setMaxPayloadLength(10000);
         setIncludeQueryString(true);
     }
@@ -29,6 +29,7 @@ public class RequestLoggingFilterConfig extends AbstractRequestLoggingFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
         super.doFilterInternal(request, responseWrapper, filterChain);
+        responseWrapper.copyBodyToResponse();
     }
 
     @Override
