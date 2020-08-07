@@ -29,7 +29,7 @@ public class RequestLoggingFilterConfig extends AbstractRequestLoggingFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
         super.doFilterInternal(request, responseWrapper, filterChain);
-        responseWrapper.copyBodyToResponse();
+        responseWrapper.copyBodyToResponse();//这句话尤为重要，虽然没有这句话，日志里也能取到responseBody，但是，返回流的内容被消费掉了（在responseWrapper 生成时），不写的话客户将读不到本身流的responseBody
     }
 
     @Override
